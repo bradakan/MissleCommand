@@ -10,9 +10,16 @@ package
 	 */
 	public class Main extends Sprite 
 	{
-		
+		private var _background : background;
 		private var _missle : Missle;
 		private var _missleArray : Array;
+		private var _missleVectorArray : Array;
+		private var _missleTargetArray : Array;
+		private var _MissleTargetLocationArray : Array;
+		private var _playerSilo1 : PlayerShootPoint;
+		private var _playerSilo2 : PlayerShootPoint;
+		private var _playerSilo3 : PlayerShootPoint;
+		private var _city : CityTarget;
 		
 		public function Main():void 
 		{
@@ -24,6 +31,25 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
+			_background = new background();
+			addChild(_background);
+			
+			_playerSilo1 = new PlayerShootPoint();
+			_playerSilo1.x = 50;
+			_playerSilo1.y = stage.stageHeight - 100;
+			
+			_playerSilo2 = new PlayerShootPoint();
+			_playerSilo2.x = stage.stageWidth / 2;
+			_playerSilo2.y = _playerSilo1.y;
+			
+			_playerSilo3 = new PlayerShootPoint();
+			_playerSilo3.x = stage.stageWidth - 50;
+			_playerSilo3.y = _playerSilo1.y;
+			
+			addChild(_playerSilo1);
+			addChild(_playerSilo2);
+			addChild(_playerSilo3);
+			
 			_missleArray = new Array();
 			for (var i = 0; i < 10; i++)
 			{
@@ -34,12 +60,14 @@ package
 				_missleArray.push(_missle);
 				trace(i);
 			}
+			
+			
 			stage.addEventListener(Event.ENTER_FRAME, update);
 		}
 		
 		private function update(e:Event):void
 		{
-			trace(_missleArray.length,_missleArray[1].y);
+			trace(stage.stageWidth,stage.stageHeight);
 			
 			for (var i = 0; i < _missleArray.length; i++)
 			{
