@@ -20,6 +20,8 @@ package
 		private var _playerSilo2 : PlayerShootPoint;
 		private var _playerSilo3 : PlayerShootPoint;
 		private var _city : CityTarget;
+		private var _tempArrayLength : int;
+		private var _playerVector : Vector2D;
 		
 		public function Main():void 
 		{
@@ -37,6 +39,9 @@ package
 			_playerSilo1 = new PlayerShootPoint();
 			_playerSilo1.x = 50;
 			_playerSilo1.y = stage.stageHeight - 100;
+			_playerVector = new Vector2D(_playerSilo1.x, _playerSilo1 .y);
+			
+			trace(_playerVector);
 			
 			_playerSilo2 = new PlayerShootPoint();
 			_playerSilo2.x = stage.stageWidth / 2;
@@ -51,14 +56,9 @@ package
 			addChild(_playerSilo3);
 			
 			_missleArray = new Array();
-			for (var i = 0; i < 10; i++)
+			for (var i : int = 0; i < 10; i++)
 			{
-				_missle = new Missle();
-				_missle.x = Math.random() * stage.stageWidth, _missle.y =  Math.random() * -50;
-				_missle.rotation = 180;
-				addChild(_missle);
-				_missleArray.push(_missle);
-				trace(i);
+				spawnMissle();
 			}
 			
 			
@@ -67,9 +67,8 @@ package
 		
 		private function update(e:Event):void
 		{
-			trace(stage.stageWidth,stage.stageHeight);
-			
-			for (var i = 0; i < _missleArray.length; i++)
+			_tempArrayLength = _missleArray.length;
+			for (var i : int = _tempArrayLength -1; i >= 0; i--)
 			{
 				_missleArray[i].y += 5;
 				if (_missleArray[i].y >700)
