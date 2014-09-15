@@ -8,7 +8,7 @@ package
 	 * ...
 	 * @author Rocky Tempelaars
 	 */
-	public class Enemy extends MovieClip
+	public class MissleClass extends MovieClip
 	{
 		var _target : MathVector;
 		var _path : MathVector;
@@ -19,12 +19,12 @@ package
 		var _startY :Number;
 		//moet er nog iets in maken om de startpositie aan te geven
 		
-		public function Enemy(targetX : Number, targetY : Number, AssetClass : Class, startX :Number, startY :Number) 
+		public function MissleClass(targetX : Number, targetY : Number, AssetClass : Class, startX :Number, startY :Number) 
 		{
 			_asset = new AssetClass();
 			_target = new MathVector(targetX, targetY);
 			_startX = startX; _startY = startY;
-			trace(_target.dx,_target.dy);
+			trace("x : " + _target.dx + " y : " + _target.dy);
 			addEventListener(Event.ADDED_TO_STAGE, init);		
 		}
 		
